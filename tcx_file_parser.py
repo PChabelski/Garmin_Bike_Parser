@@ -42,7 +42,7 @@ def tcx_to_df_biking(tcx_file):
     df['Ride ID'] = activity_start
     df['Total_Ride_Distance_km'] = df['Distance'].max()/1000 # in kilometers
     df['Total_Ride_Time_minutes'] = (df['Time'].max() - df['Time'].min()).total_seconds() / 60  # in minutes
-    print(f'Processed an activity from {activity_start} with {len(df)} datapoints')
+    print(f'Processed a biking activity from {activity_start} with {len(df)} datapoints')
     return df
 
 #########################################################################################################
@@ -78,7 +78,7 @@ def tcx_to_df_running(tcx_file):
     df['Run ID'] = activity_start
     df['Total_Run_Distance_km'] = df['Distance'].max()/1000 # in kilometers
     df['Total_Run_Time_minutes'] = (df['Time'].max() - df['Time'].min()).total_seconds() / 60  # in minutes
-    print(f'Processed an activity from {activity_start} with {len(df)} datapoints')
+    print(f'Processed a running activity from {activity_start} with {len(df)} datapoints')
     return df
 
 
@@ -93,7 +93,7 @@ for tcx_file in glob.glob(os.path.join(tcx_bike_dir, '*.tcx')):
 
 # output the combined dataframe for downstream visualization
 df_all_biking.to_csv(f'output/Garmin_Biking_all.csv', index=False)
-
+print('Biking data processing complete and saved to output/Garmin_Biking_all.csv\n\n')
 #########################################################################################
 ####### Main execution block to process all RUNNING TCX files in the specified directory
 tcx_run_dir = os.path.join(os.getcwd(), 'tcx_run_files')
@@ -104,3 +104,4 @@ for tcx_file in glob.glob(os.path.join(tcx_run_dir, '*.tcx')):
 
 # output the combined dataframe for downstream visualization
 df_all_running.to_csv(f'output/Garmin_Running_all.csv', index=False)
+print('Running data processing complete and saved to output/Garmin_Running_all.csv\n\n')
